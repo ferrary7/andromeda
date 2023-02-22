@@ -3,6 +3,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 export const Nav = styled.nav`
   background-color: black;
+  position: sticky;
 `;
 
 export const ToolBar = styled.div`

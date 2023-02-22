@@ -4,8 +4,7 @@ import background from '../../Assets/bg.mp4'
 import button from '../../Assets/Button.svg'
 import cubeCrate from '../../Assets/cubeCrate.svg'
 import Navbar from '../NavBar/Navbar';
-
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -20,7 +19,9 @@ const Home = () => {
             <div className="Homepage-row">
               <div className="Homepage-button-container">
                 <button className="Homepage-button">
-                  <img src={button} alt=''/>
+                  <Link to= '/launch'>
+                    <img src={button} alt=''/>
+                  </Link>
                 </button>
               </div>
               <div className="Homepage-text extra-text">Click here and Blast Off to the Future with the Latest Space Launches</div>
@@ -35,3 +36,4 @@ const Home = () => {
 }
 
 export default Home
+

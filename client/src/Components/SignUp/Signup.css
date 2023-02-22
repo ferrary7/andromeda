@@ -70,8 +70,7 @@
   border: none;
   border-radius: 5px;
   font-size: 1rem;
-  background-color: #7A38B2;
-  opacity: 42%;
+  background-color: rgba(121, 56, 178, 0.42); 
   color: white;
   font-family: 'Poppins', monospace;
 }
@@ -84,8 +83,7 @@ max-width: 400px;
 padding: 10px;
 border: none;
 border-radius: 5px;
-background-color: #7A38B2;
-opacity: 42%;
+background-color: rgba(121, 56, 178, 0.42);
 color: white;
 font-size: 1.2rem;
 cursor: pointer;
