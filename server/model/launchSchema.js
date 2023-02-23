@@ -21,7 +21,7 @@ const launchSchema = new mongoose.Schema({
           },
           country_code: {
             type: String,
-            required: true
+            required: false
           }
         }
       },
@@ -29,11 +29,11 @@ const launchSchema = new mongoose.Schema({
         configuration: {
           name: {
             type: String,
-            required: true
+            required: false
           },
           image_url: {
             type: String,
-            required: true
+            required: false
           }
         }
       },
@@ -46,7 +46,7 @@ const launchSchema = new mongoose.Schema({
       mission: {
         type: {
           type: String,
-          required: true
+          required: false
         },
         mission_gallery_url: {
           type: String

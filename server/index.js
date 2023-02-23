@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors')
 const app = express();
-const usersRouter = require('./routes/authentication');
-// const routes = require("./routes/heroRoutes");
+const usersRouter = require('./router/authentication');
+const launchesRouter = require('./router/launchData');
 
 dotenv.config({
     path: './config.env'
@@ -12,9 +12,9 @@ dotenv.config({
 require('./db/connection');
 
 app.use(express.json())
-app.use(cors());
+app.use(cors()); 
 app.use('/users', usersRouter);
-// app.use('/', routes);
+app.use('/api', launchesRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

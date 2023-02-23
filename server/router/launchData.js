@@ -3,15 +3,15 @@ const router = express.Router();
 
 const Launch = require("../model/launchSchema");
 
-router.get("/api/launches", async (req, res) => {
+router.get("/launches", async (req, res) => {
   try {
     const response = await fetch(
-      "https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=200&format=json"
+      "https://ll.thespacedevs.com/2.2.0/launch/upcoming?limit=100&format=json&offset=100"
     );
     const data = await response.json();
 
-    for (const launch of data.results) {
-      const newLaunch = new Launch({
+    const launchesToSave = data.results.map(launch => {
+      return {
         name: launch.name,
         net: new Date(launch.net),
         rocket: {
@@ -36,12 +36,20 @@ router.get("/api/launches", async (req, res) => {
             name: launch.mission.orbit.name,
           },
         },
-      });
+      };
+    });
 
-      await newLaunch.save();
-    }
+    const savedLaunches = await Promise.all(
+      launchesToSave.map(launchData => {
+        console.log(launchData)
+        const newLaunch = new Launch(launchData);
+        return newLaunch.save();
+      })
+    );
 
-    res.json({ message: "Data inserted into MongoDB" });
+    console.log(`Saved ${savedLaunches.length} launches to the database`);
+
+    res.json({ message: "Data inserted into MongoDB"});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
