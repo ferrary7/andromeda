@@ -10,7 +10,7 @@ router.get("/launches", async (req, res) => {
     );
     const data = await response.json();
 
-    const launchesToSave = data.results.map(launch => {
+    const launchesToSave = data.results.map((launch) => {
       return {
         name: launch.name,
         net: new Date(launch.net),
@@ -22,26 +22,24 @@ router.get("/launches", async (req, res) => {
         },
         pad: {
           name: launch.pad.name,
-          latitude: launch.pad.latitude,
-          longitude: launch.pad.longitude,
           location: {
             name: launch.pad.location.name,
             country_code: launch.pad.location.country_code,
+            map_image: launch.pad.location.map_image,
           },
         },
         mission: launch.mission && {
-          name: launch.mission.name,
-          description: launch.mission.description,
-          orbit: launch.mission.orbit && {
-            name: launch.mission.orbit.name,
-          },
+          name: launch.mission.name ? launch.mission.name : "NO",
+          type: launch.mission.type,
         },
+        image: launch.image ? launch.image : "Not found",
+        webcast_live: launch.webcast_live ? launch.webcast_live : "Not Found",
       };
     });
 
     const savedLaunches = await Promise.all(
-      launchesToSave.map(launchData => {
-        console.log(launchData)
+      launchesToSave.map((launchData) => {
+        console.log(launchData);
         const newLaunch = new Launch(launchData);
         return newLaunch.save();
       })
@@ -49,10 +47,11 @@ router.get("/launches", async (req, res) => {
 
     console.log(`Saved ${savedLaunches.length} launches to the database`);
 
-    res.json({ message: "Data inserted into MongoDB"});
+    res.json({ message: "Data inserted into MongoDB" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 module.exports = router;

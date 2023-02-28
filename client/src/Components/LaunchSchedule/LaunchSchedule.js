@@ -1,25 +1,58 @@
 import React, { useState, useEffect } from "react";
 import "./LaunchSchedule.css";
-import background from '../../Assets/bg.mp4'
+import background from "../../Assets/bg.mp4";
 import Navbar from "../NavBar/Navbar";
-import button from '../../Assets/Button.svg'
+import button from "../../Assets/Button.svg";
 import Loader from "../Loader/Loader";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import RadarIcon from "@mui/icons-material/Radar";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 function LaunchSchedule() {
   const [launchSchedule, setLaunchSchedule] = useState([]);
   const [numLaunchesToShow, setNumLaunchesToShow] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
+  const [launches, setLaunches] = useState([]);
+  const [likeCount, setLikeCount] = useState([]);
+  // console.log({isLiked: launches});
+  const handleLike = async (launch) => {
+    console.log(launch);
+    // console.log(launches);
+    const res = await fetch(
+      `http://localhost:3000/api/updateLike/${launch._id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          likeCount: launch.likeCount + 1,
+        }),
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+  };
 
   useEffect(() => {
-    const API =
-      "https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=200&format=json";
-    fetch(API)
-      .then((response) => response.json())
-      .then((data) => {
-        setLaunchSchedule(data.results);
-        setIsLoading(false);
-      })
-      .catch((error) => console.error(error));
+    const getData = async () => {
+      const response = await fetch(
+        "http://localhost:3000/data/upcomingLaunches"
+      );
+      const data = await response.json();
+      setLaunches([...data]);
+      setIsLoading(false);
+    };
+
+    getData();
   }, []);
 
   const handleViewMore = () => {
@@ -30,66 +63,86 @@ function LaunchSchedule() {
     return <Loader />;
   }
 
-  return (<>
-  <Navbar />
-    <div className="launch-schedule-container">
-      <video src={background} autoPlay loop muted></video>
-      <div className="launch-cards-container">
-        {launchSchedule.slice(0, numLaunchesToShow).map((launch) => (
-          <div className="launch-card" key={launch.id}>
-            <div className="launch-card-info">
-              <h2>{launch.name}</h2>
-              <p>Net Launch Date: {launch.net}</p>
-              <p>
-                Pad Location: {launch.pad.location.name},{" "}
-                {launch.pad.location.country_code}
-              </p>
-              <p>Rocket: {launch.rocket.configuration.name}</p>
-              <p>Launch Agency: {launch.launch_service_provider.name}</p>
-              <p>
-                Mission Type: {launch.mission ? launch.mission.type : "Unknown"}
-              </p>
+  return (
+    <>
+      <Navbar />
+      <div className="launch-schedule-container">
+        <video src={background} autoPlay loop muted></video>
+        <div className="launch-cards-container">
+          {launches.map((launch, index) => (
+            <div className="launch-card" key={index}>
+              <div className="launch-card-info">
+                <div>
+                  <h2>
+                    <RocketLaunchIcon /> {launch.name}
+                  </h2>
+                </div>
+                <div className="detailStyle">
+                  <div className="left">
+                    <p>
+                      <RadarIcon />{" "}
+                      {launch.mission ? launch.mission.name : launch.name}
+                    </p>
+                    <p>
+                      <DateRangeIcon /> {new Date(launch.net).toLocaleString()}
+                    </p>
+                    {/* <p>Image: <img src={launch.image} alt="" className="capture"></img></p> */}
+                    <p>
+                      <LocationOnIcon />
+                      <a href={launch.pad.location.map_image}>
+                        {" "}
+                        {launch.pad.location.name},{" "}
+                        {launch.pad.location.country_code}
+                      </a>
+                    </p>
+                    {/* <p>
+                  Map: {launch.pad.location.map_image}
+                </p> */}
+                    {launch.rocket &&
+                      launch.rocket.configuration &&
+                      launch.rocket.configuration.name && (
+                        <p>Rocket: {launch.rocket.configuration.name}</p>
+                      )}
+                    <p>
+                      <SupportAgentIcon /> {launch.launch_service_provider.name}
+                    </p>
+                    <p>
+                      <CampaignIcon />{" "}
+                      {launch.mission ? launch.mission.type : "Exploration"}
+                    </p>
+                  </div>
+                  <div className="right">
+                    <p onClick={() => handleLike(launch)}>
+                      {launch.likeCount ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}{" "}
+                      <span>Like</span>
+                    </p>
+                    <p>
+                      <ModeCommentIcon /> <span>Comment</span>
+                    </p>
+                    <p>
+                      <AddCircleIcon /> <span>MoreInfo</span>
+                    </p>
+                    <p>
+                      <LiveTvIcon /> <span>WatchLive</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {launch.vidURLs && launch.vidURLs.length > 0 && (
-              <div className="launch-card-video">
-                <h3>Live Video</h3>
-                <iframe
-                  src={launch.vidURLs[0]}
-                  width="560"
-                  height="315"
-                  title="Live Video"
-                ></iframe>
-              </div>
-            )}
-
-            {launch.rocket.configuration.image_url && (
-              <div className="launch-card-logo">
-                <h3>Logo</h3>
-                <img
-                  src={launch.rocket.configuration.image_url}
-                  alt="Rocket Logo"
-                />
-              </div>
-            )}
-
-            {launch.mission && launch.mission.mission_gallery_url && (
-              <div className="launch-card-gallery">
-                <h3>Gallery</h3>
-                <img
-                  src={launch.mission.mission_gallery_url}
-                  alt="Mission Gallery"
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      {numLaunchesToShow < launchSchedule.length && (
-        <button className="launch-card viewMore" onClick={handleViewMore} ><img src={button} alt=''/>Browse More Launches</button>
-      )}
+          ))}
+          {numLaunchesToShow < launchSchedule.length && (
+            <button className="viewMore" onClick={handleViewMore}>
+              <img src={button} alt="" />
+              Browse More Launches
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-      </>
+    </>
   );
 }
 
