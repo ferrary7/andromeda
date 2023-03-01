@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap');
+
+.launch-schedule-container {
+  position: relative;
+}
+
+.launch-schedule-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.launch-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.launch-card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(121, 56, 178, 0.42);
+  color: white;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.viewMore{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+    width: 350px;
+    height: 100px;
+    color: white;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .launch-card {
+    flex-direction: column;
+    min-height: 400px;
+  }
+}
+
+.launch-card-info {
+  padding: 20px;
+}
+
+.launch-card-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.launch-card-info p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.launch-card-video {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+}
+
+.launch-card-video h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.launch-card-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.launch-card-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.launch-card-logo h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.launch-card-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.launch-card-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.launch-card-gallery h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.launch-card-gallery img {
+  max-width: 100%;
+  height: auto;
+}

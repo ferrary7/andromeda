@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap');
+
+.Homepage {
+  height: 88vh;
+  position: relative;
+}
+
+.Homepage-video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+
+.Homepage-container {
+  top: 5%;
+  left: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  width: 50%;
+  position: absolute;
+}
+
+.Homepage-text {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+}
+
+.extra-text {
+  font-weight: 700;
+  width: 80%;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+}
+
+.Homepage-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.Homepage-button-container {
+  margin-right: 0;
+  margin-bottom: 2rem;
+}
+
+.Homepage-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+}
+
+.Homepage-powered-by {
+  padding-top: 2rem;
+  color: #fff;
+}
+
+.Homepage-powered-by img {
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .Homepage-container {
+    top: 10%;
+    width: 80%;
+    padding: 1rem;
+  }
+  .Homepage-text {
+    font-size: 2rem;
+  }
+  .extra-text {
+    font-size: 0.8rem;
+  }
+  .Homepage-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  .Homepage-powered-by {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .Homepage-container {
+    top: 20%;
+    width: 90%;
+  }
+  .Homepage-text {
+    font-size: 1.5rem;
+  }
+  .extra-text {
+    font-size: 0.8rem;
+  }
+  .Homepage-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  .Homepage-powered-by {
+    font-size: 0.7rem;
+  }
+}
