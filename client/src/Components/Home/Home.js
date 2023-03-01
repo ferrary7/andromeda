@@ -19,7 +19,7 @@ const Home = () => {
             <div className="Homepage-row">
               <div className="Homepage-button-container">
                 <button className="Homepage-button">
-                  <Link to= '/launch'>
+                  <Link to= '/upcomingLaunches'>
                     <img src={button} alt=''/>
                   </Link>
                 </button>

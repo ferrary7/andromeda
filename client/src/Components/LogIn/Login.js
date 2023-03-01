@@ -103,7 +103,7 @@ const Login = () => {
                 </button>
                 <p className="login-form-signup-prompt">
                   Don't have an account yet?{" "}
-                  <Link to="/signup">
+                  <Link to="/users/signup">
                     <span
                       style={{
                         color: "white",

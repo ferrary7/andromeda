@@ -12,7 +12,7 @@ const Navbar = () => {
         <Menu onClick={() => setIsOpen(!isOpen)} />
         <Tabs isOpen={isOpen}>
           <Tab href="/">About this page</Tab>
-          <Tab href="/launch">Launch schedule</Tab>
+          <Tab href="/upcomingLaunches">Launch schedule</Tab>
           <Link to='/users/signup'><TabButton>Sign In</TabButton></Link>
         </Tabs>
       </ToolBar>
