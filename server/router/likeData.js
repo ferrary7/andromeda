@@ -2,41 +2,66 @@ const express = require("express");
 const router = express.Router();
 
 const usersRouter = require("./authentication");
-const Like = require("../model/likeSchema");
+const Launch = require("../model/launchSchema");
 
-// Create a new like
+// Create or remove a like
 router.post("/likes", usersRouter, async (req, res) => {
   try {
-    console.log(req.body);
-    const likeItem = await Like.findOne({
-      launchId: req.body.launchId,
-      userId: "63f4728ccacabc775a7df985",
-    });
-    if (!likeItem) {
-      console.log({ likeItem });
-      const like = new Like({
-        launchId: req.body.launchId,
-        userId: req.body.userId,
-      });
-      await like.save();
-    } else {
-      const like = await Like.findOneAndDelete({
-        launchId: req.body.launchId,
-        userId: "63f4728ccacabc775a7df985",
-      });
-      console.log({ like });
+    const { launchId } = req.body;
+    const userId = "63f47217cacabc775a7df97f";
+    const launch = await Launch.findById(launchId);
+    if (!launch) {
+      return res.status(404).send("Launch not found");
     }
-
-    // launchCard.likes = (launchCard.likes || 0) + 1;
-    // await launchCard.save();
-
-    // res.send({like, launchCard});
-    res.json({ mssg: "Suc" });
+    const userLiked = launch.likes.includes(userId);
+    if (userLiked) {
+      // Remove like if user already liked the launch
+      const updatedLaunch = await Launch.findByIdAndUpdate(
+        launchId,
+        {
+          $pull: {
+            likes: userId,
+          },
+        },
+        { new: true }
+      );
+      res.json(updatedLaunch);
+    } else {
+      // Add like if user has not already liked the launch
+      const updatedLaunch = await Launch.findByIdAndUpdate(
+        launchId,
+        {
+          $push: {
+            likes: userId,
+          },
+        },
+        { new: true }
+      );
+      res.json(updatedLaunch);
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 });
+
+// Create a new like
+// router.post("/likes", usersRouter, async (req, res) => {
+//   try {
+//     const { launchId } = req.body;
+//     const userId = "63f47217cacabc775a7df97f";
+//     const launch = await Launch.findByIdAndUpdate(launchId, {
+//       $push: {
+//         likes: userId,
+//       },
+//     });
+//     console.log({ launch });
+//     res.json(launch);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error);
+//   }
+// });
 
 // // Delete a like
 // router.delete('/likes/:id', usersRouter, async (req, res) => {
