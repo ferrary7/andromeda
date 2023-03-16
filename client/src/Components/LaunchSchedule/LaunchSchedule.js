@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jwtDecode from "jwt-decode";
 import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
 import Navbar from "../NavBar/Navbar";
@@ -23,11 +24,31 @@ function LaunchSchedule() {
 
   useEffect(() => {
     const getData = async () => {
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3000/data/upcomingLaunches"
+        "http://localhost:3000/data/upcomingLaunches",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const data = await response.json();
-      setLaunchSchedule([...data]);
+
+      const likedLaunches =
+        JSON.parse(localStorage.getItem("likedLaunches")) || [];
+
+      const updatedLaunchSchedule = data.map((launch) => {
+        if (likedLaunches.includes(launch._id)) {
+          return {
+            ...launch,
+            likes: [...launch.likes, jwtDecode(token)._id],
+          };
+        }
+        return launch;
+      });
+
+      setLaunchSchedule(updatedLaunchSchedule);
       setIsLoading(false);
     };
 
@@ -36,13 +57,23 @@ function LaunchSchedule() {
 
   const handleLikeClick = async (launchId) => {
     try {
+      const token = localStorage.getItem("token");
+      const userId = jwtDecode(token)._id;
       const response = await fetch(`http://localhost:3000/id/likes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ launchId }),
+        body: JSON.stringify({ launchId, userId }),
       });
+
+      const likedLaunches =
+        JSON.parse(localStorage.getItem("likedLaunches")) || [];
+      localStorage.setItem(
+        "likedLaunches",
+        JSON.stringify([...likedLaunches, launchId])
+      );
       const updatedLaunch = await response.json();
       setLaunchSchedule((prevLaunches) =>
         prevLaunches.map((launch) =>
@@ -108,7 +139,9 @@ function LaunchSchedule() {
                   </div>
                   <div className="right">
                     <p onClick={() => handleLikeClick(launch._id)}>
-                      {launch.likes.includes("63f47217cacabc775a7df97f") ? (
+                      {launch.likes.includes(
+                        jwtDecode(localStorage.getItem("token"))._id
+                      ) ? (
                         <FavoriteIcon />
                       ) : (
                         <FavoriteBorderIcon />

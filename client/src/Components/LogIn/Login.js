@@ -3,7 +3,7 @@ import "./Login.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import background from "../../Assets/bg.mp4";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../NavBar/Navbar";
 
 const validationSchema = Yup.object().shape({
@@ -19,36 +19,38 @@ const initialValues = {
 };
 
 const Login = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
-  const handleLogin = async (values, { setSubmitting, setErrors, setStatus, history }) => {
+  const handleLogin = async (
+    values,
+    { setSubmitting, setErrors, setStatus }
+  ) => {
     try {
-      const response = await fetch('http://localhost:3000/users/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/users/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
-        console.log('User authenticated');
-        naviagte(`/`);
+        console.log("User authenticated");
+        localStorage.setItem("token", data.token);
+        navigate(`/`);
       } else {
         console.log(data.error);
         setErrors({ password: data.error });
       }
     } catch (err) {
       console.log(err);
-      setErrors({ password: 'Something went wrong. Please try again.' });
+      setErrors({ password: "Something went wrong. Please try again." });
     }
-  
+
     setSubmitting(false);
   };
-  
-      
 
   return (
     <>
