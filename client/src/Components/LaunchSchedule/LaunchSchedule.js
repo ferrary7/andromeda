@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jwtDecode from "jwt-decode";
 import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
 import Navbar from "../NavBar/Navbar";
@@ -20,40 +21,69 @@ function LaunchSchedule() {
   const [launchSchedule, setLaunchSchedule] = useState([]);
   const [numLaunchesToShow, setNumLaunchesToShow] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
-  const [launches, setLaunches] = useState([]);
-  const [likeCount, setLikeCount] = useState([]);
-  // console.log({isLiked: launches});
-  const handleLike = async (launch) => {
-    console.log(launch);
-    // console.log(launches);
-    const res = await fetch(
-      `http://localhost:3000/api/updateLike/${launch._id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "PUT",
-        body: JSON.stringify({
-          likeCount: launch.likeCount + 1,
-        }),
-      }
-    );
-    const data = await res.json();
-    console.log(data);
-  };
 
   useEffect(() => {
     const getData = async () => {
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3000/data/upcomingLaunches"
+        "http://localhost:3000/data/upcomingLaunches",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const data = await response.json();
-      setLaunches([...data]);
+
+      const likedLaunches =
+        JSON.parse(localStorage.getItem("likedLaunches")) || [];
+
+      const updatedLaunchSchedule = data.map((launch) => {
+        if (likedLaunches.includes(launch._id)) {
+          return {
+            ...launch,
+            likes: [...launch.likes, jwtDecode(token)._id],
+          };
+        }
+        return launch;
+      });
+
+      setLaunchSchedule(updatedLaunchSchedule);
       setIsLoading(false);
     };
 
     getData();
   }, []);
+
+  const handleLikeClick = async (launchId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const userId = jwtDecode(token)._id;
+      const response = await fetch(`http://localhost:3000/id/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ launchId, userId }),
+      });
+
+      const likedLaunches =
+        JSON.parse(localStorage.getItem("likedLaunches")) || [];
+      localStorage.setItem(
+        "likedLaunches",
+        JSON.stringify([...likedLaunches, launchId])
+      );
+      const updatedLaunch = await response.json();
+      setLaunchSchedule((prevLaunches) =>
+        prevLaunches.map((launch) =>
+          launch._id === updatedLaunch._id ? updatedLaunch : launch
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleViewMore = () => {
     setNumLaunchesToShow(numLaunchesToShow + 10);
@@ -69,7 +99,7 @@ function LaunchSchedule() {
       <div className="launch-schedule-container">
         <video src={background} autoPlay loop muted></video>
         <div className="launch-cards-container">
-          {launches.map((launch, index) => (
+          {launchSchedule.slice(0, numLaunchesToShow).map((launch, index) => (
             <div className="launch-card" key={index}>
               <div className="launch-card-info">
                 <div>
@@ -86,7 +116,6 @@ function LaunchSchedule() {
                     <p>
                       <DateRangeIcon /> {new Date(launch.net).toLocaleString()}
                     </p>
-                    {/* <p>Image: <img src={launch.image} alt="" className="capture"></img></p> */}
                     <p>
                       <LocationOnIcon />
                       <a href={launch.pad.location.map_image}>
@@ -95,9 +124,6 @@ function LaunchSchedule() {
                         {launch.pad.location.country_code}
                       </a>
                     </p>
-                    {/* <p>
-                  Map: {launch.pad.location.map_image}
-                </p> */}
                     {launch.rocket &&
                       launch.rocket.configuration &&
                       launch.rocket.configuration.name && (
@@ -112,13 +138,15 @@ function LaunchSchedule() {
                     </p>
                   </div>
                   <div className="right">
-                    <p onClick={() => handleLike(launch)}>
-                      {launch.likeCount ? (
+                    <p onClick={() => handleLikeClick(launch._id)}>
+                      {launch.likes.includes(
+                        jwtDecode(localStorage.getItem("token"))._id
+                      ) ? (
                         <FavoriteIcon />
                       ) : (
                         <FavoriteBorderIcon />
                       )}{" "}
-                      <span>Like</span>
+                      <span>Likes ({launch.likes.length})</span>
                     </p>
                     <p>
                       <ModeCommentIcon /> <span>Comment</span>

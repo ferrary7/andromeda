@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 const User = require("../model/userSchema");
 
@@ -23,8 +24,10 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email, password });
 
     if (user) {
-      console.log(user)
-      res.json({ name: user.name });
+      console.log(user);
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+      console.log(token);
+      res.json({ name: user.name, token: token });
     } else {
       res.status(422).json({ error: "Invalid email or password" });
     }

@@ -1,4 +1,3 @@
-const { Int32 } = require("bson");
 const mongoose = require("mongoose");
 
 const launchSchema = new mongoose.Schema({
@@ -62,6 +61,12 @@ const launchSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 const Launch = mongoose.model("Launch", launchSchema);
 
