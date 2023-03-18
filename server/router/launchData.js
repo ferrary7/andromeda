@@ -1,12 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const cron = require("node-cron");
 
 const Launch = require("../model/launchSchema");
+
+cron.schedule("0 * * * *", async () => {
+  try {
+    // Find launches with past launch times and delete them from the database
+    const result = await Launch.deleteMany({ net: { $lt: new Date() } });
+    console.log(`Deleted ${result.deletedCount} launches from the database`);
+  } catch (error) {
+    console.error(`Error deleting launches from the database: ${error}`);
+  }
+});
 
 router.get("/launches", async (req, res) => {
   try {
     const response = await fetch(
-      "https://ll.thespacedevs.com/2.2.0/launch/upcoming?limit=100&format=json&offset=100"
+      "https://ll.thespacedevs.com/2.2.0/launch/upcoming?limit=100&format=json&offset=0"
     );
     const data = await response.json();
 
@@ -52,6 +63,5 @@ router.get("/launches", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 module.exports = router;
