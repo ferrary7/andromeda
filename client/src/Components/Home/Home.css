@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap");
 
 .Homepage {
   height: 88vh;
@@ -12,6 +12,13 @@
   height: 100%;
   object-fit: cover;
   position: absolute;
+}
+
+.over-container {
+  display: flex;
+  height: 80vh;
+  border: 5px solid green;
+  position: relative;
 }
 
 .Homepage-container {
@@ -32,7 +39,7 @@
   margin-bottom: 2rem;
   font-size: 3rem;
   text-align: left;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
 }
 
 .extra-text {
@@ -41,7 +48,7 @@
   color: #fff;
   font-size: 1.2rem;
   text-align: left;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
 }
 
 .Homepage-row {
@@ -71,6 +78,16 @@
 
 .Homepage-powered-by img {
   height: 18px;
+}
+
+.Homepage-launch-info {
+  height: 180px;
+  width: 500px;
+  position: relative;
+  top: 5rem;
+  left: 60%;
+  background-color: white;
+  border: 5px solid red;
 }
 
 @media (max-width: 768px) {

@@ -9,7 +9,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("/api/user", {
+        const response = await fetch("http://localhost:3000/api/user", {
           method: "GET",
           credentials: "include",
         });
