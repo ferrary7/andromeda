@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        "http://localhost:3000/data/upcomingLaunches"
+        process.env.REACT_APP_SERVER_URL + "/data/upcomingLaunches"
       );
       const data = await response.json();
       setLaunch(data[0]);
