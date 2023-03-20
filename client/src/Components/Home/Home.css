@@ -17,20 +17,20 @@
 .over-container {
   display: flex;
   height: 80vh;
-  border: 5px solid green;
+  /* border: 5px solid green; */
   position: relative;
 }
 
 .Homepage-container {
+  /* position: absolute;
   top: 5%;
-  left: 2%;
+  left: 2%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 10rem 5rem;
   width: 50%;
-  position: absolute;
 }
 
 .Homepage-text {
@@ -81,13 +81,15 @@
 }
 
 .Homepage-launch-info {
-  height: 180px;
+  display: flex;
+  align-items: center;
+  /* height: 180px;
   width: 500px;
   position: relative;
   top: 5rem;
   left: 60%;
   background-color: white;
-  border: 5px solid red;
+  border: 5px solid red; */
 }
 
 @media (max-width: 768px) {

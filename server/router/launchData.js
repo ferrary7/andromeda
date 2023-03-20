@@ -16,9 +16,7 @@ cron.schedule("0 * * * *", async () => {
 
 router.get("/launches", async (req, res) => {
   try {
-    const response = await fetch(
-      "https://ll.thespacedevs.com/2.2.0/launch/upcoming?limit=100&format=json&offset=0"
-    );
+    const response = await fetch(process.env.REACT_APP_API_URL);
     const data = await response.json();
 
     const launchesToSave = data.results.map((launch) => {
