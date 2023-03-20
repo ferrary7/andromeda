@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Link } from "react";
 import jwtDecode from "jwt-decode";
 import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
@@ -151,9 +151,11 @@ function LaunchSchedule() {
                     <p>
                       <ModeCommentIcon /> <span>Comment</span>
                     </p>
-                    <p>
-                      <AddCircleIcon /> <span>MoreInfo</span>
-                    </p>
+                    <Link to="/">
+                      <p>
+                        <AddCircleIcon /> <span>MoreInfo</span>
+                      </p>
+                    </Link>
                     <p>
                       <LiveTvIcon /> <span>WatchLive</span>
                     </p>
