@@ -5,6 +5,7 @@ import button from "../../Assets/Button.svg";
 import cubeCrate from "../../Assets/cubeCrate.svg";
 import Navbar from "../NavBar/Navbar";
 import { Link } from "react-router-dom";
+import LaunchDetails from "../LaunchDatails/LaunchDetails";
 
 const Home = () => {
   const [launch, setLaunch] = useState(null);
@@ -14,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        "http://localhost:3000/data/upcomingLaunches"
+        process.env.REACT_APP_SERVER_URL + "/data/upcomingLaunches"
       );
       const data = await response.json();
       setLaunch(data[0]);
@@ -79,22 +80,7 @@ const Home = () => {
             </div>
           </div>
           <div className="Homepage-launch-info">
-            {launch ? (
-              <>
-                <div>Mission Name: {launch.name}</div>
-                <div>Launch Date: {new Date(launch.net).toLocaleString()}</div>
-                {timeRemaining ? (
-                  <div>
-                    Launch in: {timeRemaining.days}d {timeRemaining.hours}h{" "}
-                    {timeRemaining.minutes}m {timeRemaining.seconds}s
-                  </div>
-                ) : (
-                  <div>Launch has occurred.</div>
-                )}
-              </>
-            ) : (
-              <div>Loading...</div>
-            )}
+            <LaunchDetails />
           </div>
         </div>
       </div>

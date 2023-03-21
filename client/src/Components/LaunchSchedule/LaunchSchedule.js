@@ -26,7 +26,7 @@ function LaunchSchedule() {
     const getData = async () => {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3000/data/upcomingLaunches",
+        process.env.REACT_APP_SERVER_URL + "/data/upcomingLaunches",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,14 +59,17 @@ function LaunchSchedule() {
     try {
       const token = localStorage.getItem("token");
       const userId = jwtDecode(token)._id;
-      const response = await fetch(`http://localhost:3000/id/likes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ launchId, userId }),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + `/id/likes`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ launchId, userId }),
+        }
+      );
 
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
