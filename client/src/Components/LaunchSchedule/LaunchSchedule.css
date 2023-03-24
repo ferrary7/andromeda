@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Lacquer&family=Nunito+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Lacquer&family=Nunito+Sans&display=swap");
 
 .launch-schedule-container {
   position: relative;
@@ -37,24 +37,23 @@
   border-radius: 5px;
 }
 
-.viewMore{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 1rem;
-    z-index: 1;
-    flex-direction: row;
-    width: 350px;
-    height: 100px;
-    color: white;
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    font-family: 'Fira Code', monospace;
-    font-size: 1.2rem;
-    cursor: pointer;
+.viewMore {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+  flex-direction: row;
+  width: 350px;
+  height: 100px;
+  color: white;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  font-family: "Fira Code", monospace;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
-
 
 .launch-card-info {
   padding: 20px;
@@ -62,15 +61,16 @@
 
 .launch-card-info h2 {
   font-size: 2rem;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
 }
 
-.launch-card-info p, .launch-card-info a{
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: 'Fira Code', monospace;
-    text-decoration: none;
-    color: white;
+.launch-card-info p,
+.launch-card-info a {
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Fira Code", monospace;
+  text-decoration: none;
+  color: white;
 }
 
 .launch-card-video {
@@ -110,60 +110,59 @@
 }
 
 .launch-card-gallery {
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
 .launch-card-gallery h3 {
-    font-size: 24px;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
 .launch-card-gallery img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-.capture{
-    height: 100px;
-    width: 100px;
+.capture {
+  height: 100px;
+  width: 100px;
 }
 
-.detailStyle{
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    flex-direction: row;
+.detailStyle {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: row;
 }
-.left{
-    width: 80%;
+.left {
+  width: 80%;
 }
-.right{
-    width: 20%;
-    text-align: left;
+.right {
+  width: 20%;
+  text-align: left;
 }
-
 
 @media screen and (max-width: 768px) {
   .launch-card {
     flex-direction: column;
     min-height: 400px;
   }
-  .detailStyle{
+  .detailStyle {
     flex-direction: column;
   }
-  .left{
+  .left {
     width: 100%;
   }
-  .right{
+  .right {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
   }
-  .right span{
+  .right span {
     display: none;
   }
 }

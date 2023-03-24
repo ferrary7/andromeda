@@ -5,7 +5,7 @@ import button from "../../Assets/Button.svg";
 import cubeCrate from "../../Assets/cubeCrate.svg";
 import Navbar from "../NavBar/Navbar";
 import { Link } from "react-router-dom";
-import LaunchDetails from "../LaunchDatails/LaunchDetails";
+import LaunchDetails from "../LaunchDetails/LaunchDetails";
 
 const Home = () => {
   const [launch, setLaunch] = useState(null);
@@ -76,11 +76,38 @@ const Home = () => {
               </div>
             </div>
             <div className="Homepage-powered-by">
-              <img src={cubeCrate} alt="" />
+              <a
+                href="http://www.cubecrate.co"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={cubeCrate} alt="" />
+              </a>
             </div>
           </div>
           <div className="Homepage-launch-info">
-            <LaunchDetails />
+            {launch && (
+              <>
+                {timeRemaining ? (
+                  <>
+                    <LaunchDetails
+                      name={launch.name}
+                      location={""}
+                      isLoading={false}
+                      date={new Date(launch.net).toLocaleString()}
+                      time={{
+                        days: timeRemaining.days,
+                        hours: timeRemaining.hours,
+                        minutes: timeRemaining.minutes,
+                        seconds: timeRemaining.seconds,
+                      }}
+                    />
+                  </>
+                ) : (
+                  <LaunchDetails isLoading={true} />
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

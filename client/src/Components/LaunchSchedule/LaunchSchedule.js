@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Link } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
@@ -26,7 +27,7 @@ function LaunchSchedule() {
     const getData = async () => {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/data/upcomingLaunches",
+        "http://localhost:3000/data/upcomingLaunches",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +35,7 @@ function LaunchSchedule() {
         }
       );
       const data = await response.json();
-
+      console.log(data);
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
 
@@ -59,17 +60,15 @@ function LaunchSchedule() {
     try {
       const token = localStorage.getItem("token");
       const userId = jwtDecode(token)._id;
-      const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + `/id/likes`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ launchId, userId }),
-        }
-      );
+      // console.log(process.env.REACT_APP_SERVER_URL + `/id/likes`);
+      const response = await fetch(`http://localhost:3000/id/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ launchId, userId }),
+      });
 
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
@@ -154,7 +153,7 @@ function LaunchSchedule() {
                     <p>
                       <ModeCommentIcon /> <span>Comment</span>
                     </p>
-                    <Link to="/">
+                    <Link to={`/launches/${launch._id}`}>
                       <p>
                         <AddCircleIcon /> <span>MoreInfo</span>
                       </p>
