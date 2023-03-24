@@ -9,10 +9,13 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/user", {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetch(
+          process.env.REACT_APP_SERVER_URL + "/api/user",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
 
         if (response.ok) {
           const user = await response.json();

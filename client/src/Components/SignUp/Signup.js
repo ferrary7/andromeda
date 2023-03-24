@@ -6,7 +6,6 @@ import background from "../../Assets/bg.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../NavBar/Navbar";
 
-
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string()
@@ -16,9 +15,9 @@ const validationSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Please confirm your password"),
-  });
-  
-  const initialValues = {
+});
+
+const initialValues = {
   name: "",
   email: "",
   password: "",
@@ -27,24 +26,26 @@ const validationSchema = Yup.object().shape({
 
 const SignUp = () => {
   const naviagte = useNavigate();
-  
+
   const handleSignUp = (values) => {
-    fetch('http://localhost:3000/users/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch(process.env.REACT_APP_SERVER_URL + "/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
-    }).then((res) => {
-      if (res.status === 200) {
-        // Success
-        console.log('Signed up successfully');
-        naviagte(`/users/login`);
-      } else {
-        // Error
-        console.log('Error signing up');
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // Success
+          console.log("Signed up successfully");
+          naviagte(`/users/login`);
+        } else {
+          // Error
+          console.log("Error signing up");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
