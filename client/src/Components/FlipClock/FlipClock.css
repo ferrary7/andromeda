@@ -37,3 +37,25 @@
 
   color: #ffffff;
 }
+
+@media screen and (max-width: 768px) {
+  .flip-clock {
+    width: 60vw;
+  }
+  .flip-clock .box {
+    background: #d9d9d9;
+    border-radius: 5px;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .box .count {
+    font-size: 15px;
+  }
+  .box .text {
+    font-size: 10px;
+  }
+}

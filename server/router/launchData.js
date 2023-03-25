@@ -16,7 +16,7 @@ cron.schedule("0 * * * *", async () => {
 
 router.get("/launches", async (req, res) => {
   try {
-    const response = await fetch(process.env.REACT_APP_API_URL);
+    const response = await fetch(process.env.API_URL);
     const data = await response.json();
 
     const launchesToSave = data.results.map((launch) => {
@@ -28,21 +28,34 @@ router.get("/launches", async (req, res) => {
         },
         launch_service_provider: {
           name: launch.launch_service_provider.name,
+          type: launch.launch_service_provider.type,
         },
         pad: {
           name: launch.pad.name,
+          latitude: launch.pad.latitude,
+          longitude: launch.pad.longitude,
           location: {
             name: launch.pad.location.name,
             country_code: launch.pad.location.country_code,
             map_image: launch.pad.location.map_image,
+            total_launch_count: launch.pad.total_launch_count,
           },
         },
         mission: launch.mission && {
           name: launch.mission.name ? launch.mission.name : "NO",
           type: launch.mission.type,
+          description: launch.mission.description,
+          orbit: {
+            name: launch.mission.orbit.name,
+            abbrev: launch.mission.orbit.abbrev,
+          },
         },
         image: launch.image ? launch.image : "Not found",
         webcast_live: launch.webcast_live ? launch.webcast_live : "Not Found",
+        status: {
+          name: launch.status.name,
+          description: launch.status.description,
+        },
       };
     });
 

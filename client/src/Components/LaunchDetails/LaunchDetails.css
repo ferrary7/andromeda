@@ -1,52 +1,61 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&display=swap");
 
-* {
+.launchDetailsContainer * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-.launch-details-container {
-  padding: 10px 50px 30px 50px;
+.launchDetailsContainer {
+  padding: 30px 50px 30px 50px;
   background: rgba(122, 56, 178, 0.42);
-  border-radius: 20px;
-
+  border-radius: 5px;
+  margin: 2rem;
   text-align: center;
-
   display: flex;
   flex-direction: column;
 }
 
-.launch-heading {
+.launchHeading {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 42px;
+  font-size: 50px;
   line-height: 82px;
-
   margin-bottom: 20px;
-
   color: #ffffff;
 }
 
-.launch-title {
+.launchTitle {
   font-family: "Fira Code";
   font-style: normal;
   font-weight: 700;
-  font-size: 34px;
+  font-size: 25px;
   line-height: 72px;
-
   color: #ffffff;
 }
 
-.launch-info {
+.launchInfo {
   font-family: "Fira Code";
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 26px;
-
   color: #ffffff;
-
   margin-bottom: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .launchDetailsContainer {
+    width: 80vw;
+  }
+  .launchHeading {
+    font-size: 25px;
+    height: 15px;
+  }
+  .launchInfo,
+  .launchTitle {
+    font-size: 10px;
+    height: 40px;
+  }
 }

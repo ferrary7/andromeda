@@ -14,6 +14,14 @@ const launchSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    latitude: {
+      type: String,
+      required: false,
+    },
+    longitude: {
+      type: String,
+      required: false,
+    },
     location: {
       name: {
         type: String,
@@ -26,6 +34,10 @@ const launchSchema = new mongoose.Schema({
       map_image: {
         type: String,
         required: true,
+      },
+      total_launch_count: {
+        type: Number,
+        required: false,
       },
     },
   },
@@ -42,6 +54,10 @@ const launchSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: false,
+    },
   },
   mission: {
     name: {
@@ -52,6 +68,20 @@ const launchSchema = new mongoose.Schema({
       type: String,
       required: false,
     },
+    description: {
+      type: String,
+      required: false,
+    },
+    orbit: {
+      name: {
+        type: String,
+        required: false,
+      },
+      abbrev: {
+        type: String,
+        required: false,
+      },
+    },
   },
   image: {
     type: String,
@@ -60,6 +90,16 @@ const launchSchema = new mongoose.Schema({
   webcast_live: {
     type: String,
     required: true,
+  },
+  status: {
+    name: {
+      type: String,
+      required: false,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
   },
   likes: [
     {

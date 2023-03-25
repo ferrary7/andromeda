@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
@@ -16,17 +17,19 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
+import CloseIcon from "@material-ui/icons/Close";
 
 function LaunchSchedule() {
   const [launchSchedule, setLaunchSchedule] = useState([]);
   const [numLaunchesToShow, setNumLaunchesToShow] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCommentModal, setShowCommentModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/data/upcomingLaunches",
+        "http://localhost:3000/data/upcomingLaunches",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +37,7 @@ function LaunchSchedule() {
         }
       );
       const data = await response.json();
-
+      console.log(data);
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
 
@@ -59,17 +62,15 @@ function LaunchSchedule() {
     try {
       const token = localStorage.getItem("token");
       const userId = jwtDecode(token)._id;
-      const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + `/id/likes`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ launchId, userId }),
-        }
-      );
+      // console.log(process.env.REACT_APP_SERVER_URL + `/id/likes`);
+      const response = await fetch(`http://localhost:3000/id/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ launchId, userId }),
+      });
 
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
@@ -95,6 +96,14 @@ function LaunchSchedule() {
   if (isLoading) {
     return <Loader />;
   }
+
+  const handleCommentClick = () => {
+    setShowCommentModal(true);
+  };
+
+  const handleCloseCommentModal = () => {
+    setShowCommentModal(false);
+  };
 
   return (
     <>
@@ -141,7 +150,10 @@ function LaunchSchedule() {
                     </p>
                   </div>
                   <div className="right">
-                    <p onClick={() => handleLikeClick(launch._id)}>
+                    <p
+                      onClick={() => handleLikeClick(launch._id)}
+                      className="likeBox"
+                    >
                       {launch.likes.includes(
                         jwtDecode(localStorage.getItem("token"))._id
                       ) ? (
@@ -150,13 +162,16 @@ function LaunchSchedule() {
                         <FavoriteBorderIcon />
                       )}{" "}
                       <span>Likes ({launch.likes.length})</span>
+                      <div className="likes">({launch.likes.length})</div>
                     </p>
-                    <p>
+                    <p onClick={handleCommentClick}>
                       <ModeCommentIcon /> <span>Comment</span>
                     </p>
-                    <p>
-                      <AddCircleIcon /> <span>MoreInfo</span>
-                    </p>
+                    <Link to={`/launches/${launch._id}`}>
+                      <p>
+                        <AddCircleIcon /> <span>MoreInfo</span>
+                      </p>
+                    </Link>
                     <p>
                       <LiveTvIcon /> <span>WatchLive</span>
                     </p>
@@ -173,6 +188,17 @@ function LaunchSchedule() {
           )}
         </div>
       </div>
+      {showCommentModal && (
+        <div className="comment-modal">
+          <div className="modal-content">
+            <CloseIcon
+              className="close-icon"
+              onClick={handleCloseCommentModal}
+            />
+            <h2>Comment</h2>
+          </div>
+        </div>
+      )}
     </>
   );
 }
