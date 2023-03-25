@@ -73,6 +73,10 @@
   color: white;
 }
 
+.launch-card-info .right p {
+  cursor: pointer;
+}
+
 .launch-card-video {
   width: 100%;
   padding-bottom: 56.25%;
@@ -144,11 +148,62 @@
   width: 20%;
   text-align: left;
 }
+.likes {
+  display: none;
+}
+
+.comment-modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 800px;
+  height: 500px;
+}
+
+.close-icon {
+  position: absolute;
+  color: white;
+  top: 4rem;
+  right: 20rem;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 2rem;
+  font-family: "Fira Code", monospace;
+  margin-right: 20px;
+}
+
+.comment-box {
+  width: 100%;
+  padding: 20px;
+}
 
 @media screen and (max-width: 768px) {
   .launch-card {
     flex-direction: column;
     min-height: 400px;
+  }
+  .launch-card-info .likeBox {
+    display: flex;
+    flex-direction: row;
   }
   .detailStyle {
     flex-direction: column;
@@ -164,5 +219,28 @@
   }
   .right span {
     display: none;
+  }
+  .likes {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+  }
+  .modal-content {
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .comment-box {
+    margin-top: 20px;
+  }
+  .close-icon {
+    top: 20px;
+    right: 10px;
+    color: black;
   }
 }

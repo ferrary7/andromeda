@@ -93,6 +93,9 @@
 }
 
 @media (max-width: 768px) {
+  .over-container {
+    flex-direction: column;
+  }
   .Homepage-container {
     top: 10%;
     width: 80%;

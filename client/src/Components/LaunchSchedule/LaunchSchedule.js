@@ -17,11 +17,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
+import CloseIcon from "@material-ui/icons/Close";
 
 function LaunchSchedule() {
   const [launchSchedule, setLaunchSchedule] = useState([]);
   const [numLaunchesToShow, setNumLaunchesToShow] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCommentModal, setShowCommentModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -95,6 +97,14 @@ function LaunchSchedule() {
     return <Loader />;
   }
 
+  const handleCommentClick = () => {
+    setShowCommentModal(true);
+  };
+
+  const handleCloseCommentModal = () => {
+    setShowCommentModal(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -140,7 +150,10 @@ function LaunchSchedule() {
                     </p>
                   </div>
                   <div className="right">
-                    <p onClick={() => handleLikeClick(launch._id)}>
+                    <p
+                      onClick={() => handleLikeClick(launch._id)}
+                      className="likeBox"
+                    >
                       {launch.likes.includes(
                         jwtDecode(localStorage.getItem("token"))._id
                       ) ? (
@@ -149,8 +162,9 @@ function LaunchSchedule() {
                         <FavoriteBorderIcon />
                       )}{" "}
                       <span>Likes ({launch.likes.length})</span>
+                      <div className="likes">({launch.likes.length})</div>
                     </p>
-                    <p>
+                    <p onClick={handleCommentClick}>
                       <ModeCommentIcon /> <span>Comment</span>
                     </p>
                     <Link to={`/launches/${launch._id}`}>
@@ -174,6 +188,17 @@ function LaunchSchedule() {
           )}
         </div>
       </div>
+      {showCommentModal && (
+        <div className="comment-modal">
+          <div className="modal-content">
+            <CloseIcon
+              className="close-icon"
+              onClick={handleCloseCommentModal}
+            />
+            <h2>Comment</h2>
+          </div>
+        </div>
+      )}
     </>
   );
 }

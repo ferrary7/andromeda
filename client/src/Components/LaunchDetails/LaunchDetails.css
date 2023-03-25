@@ -44,3 +44,18 @@
   color: #ffffff;
   margin-bottom: 40px;
 }
+
+@media screen and (max-width: 768px) {
+  .launchDetailsContainer {
+    width: 80vw;
+  }
+  .launchHeading {
+    font-size: 25px;
+    height: 15px;
+  }
+  .launchInfo,
+  .launchTitle {
+    font-size: 10px;
+    height: 40px;
+  }
+}
