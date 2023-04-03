@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Poppins:wght@300&display=swap");
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 50px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+.details-container::-webkit-scrollbar {
+  display: none;
+}
+.details {
+  padding: 2rem;
+  background-color: rgba(121, 56, 178, 0.42);
+  color: white;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+.details::-webkit-scrollbar {
+  display: none;
+}
+.more-info {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.more-info h1 {
+  font-size: 2.5rem;
+}
+
+.more-info h2 {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.more-info p {
+  text-align: left;
+  font-weight: bold;
+  color: white;
+  font-family: "Fira Code", monospace;
+}
+
+.more-info svg {
+  margin-right: 10px;
+}
+
+.more-info-description {
+  display: flex;
+  justify-content: center;
+}
+
+.more-info-image {
+  height: 300px;
+}
+
+.agency {
+  display: flex;
+  align-items: center;
+}
+
+.agency-logo {
+  max-height: 50px;
+  height: auto\9;
+  width: auto; /* ie8 */
+}

@@ -27,7 +27,7 @@ const Login = () => {
   ) => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/login",
+        `${process.env.REACT_APP_SERVER_URL}/users/login`,
         {
           method: "POST",
           headers: {
@@ -40,6 +40,7 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("userName", data.name);
         console.log("User authenticated");
         localStorage.setItem("token", data.token);
         navigate(`/`);

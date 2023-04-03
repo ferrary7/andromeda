@@ -25,21 +25,19 @@ const initialValues = {
 };
 
 const SignUp = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
   const handleSignUp = (values) => {
-    fetch(process.env.REACT_APP_SERVER_URL + "/users/signup", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     })
       .then((res) => {
         if (res.status === 200) {
-          // Success
           console.log("Signed up successfully");
-          naviagte(`/users/login`);
+          navigate(`/users/login`);
         } else {
-          // Error
           console.log("Error signing up");
         }
       })
