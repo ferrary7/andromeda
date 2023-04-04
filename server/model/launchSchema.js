@@ -107,6 +107,10 @@ const launchSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  comments: {
+    type: Array,
+    required: false,
+  },
 });
 const Launch = mongoose.model("Launch", launchSchema);
 

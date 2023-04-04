@@ -37,7 +37,7 @@ export const Tab = styled.a`
   text-decoration: none;
   &:hover {
     transform: scale(1.1);
-}
+  }
 `;
 
 export const TabButton = styled.button`
@@ -48,7 +48,7 @@ export const TabButton = styled.button`
   font-size: 18px;
   font-weight: 700;
   text-decoration: none;
-  border: 3px solid #7A38B2;
+  border: 3px solid #7a38b2;
   border-radius: 20px;
   background-color: transparent;
   cursor: pointer;
@@ -65,9 +65,6 @@ export const Logo = styled.a`
   font-weight: bold;
 `;
 
-
-
-
 export const Menu = styled(MenuIcon)`
   cursor: pointer;
   display: none !important;
@@ -76,4 +73,14 @@ export const Menu = styled(MenuIcon)`
   @media (max-width: 768px) {
     display: flex !important;
   }
+`;
+
+export const LogoutButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
 `;

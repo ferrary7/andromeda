@@ -12,6 +12,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  z-index: -1;
 }
 
 .launch-cards-container {
@@ -20,9 +21,12 @@
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding-left: 50px;
   height: 100vh;
   overflow-y: scroll;
+}
+.launch-cards-container::-webkit-scrollbar {
+  display: none;
 }
 
 .launch-card {
@@ -53,6 +57,13 @@
   font-family: "Fira Code", monospace;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.launch-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 40px;
+  gap: 50px;
 }
 
 .launch-card-info {
@@ -151,38 +162,128 @@
 .likes {
   display: none;
 }
+.likeBox {
+  display: flex;
+  gap: 0.6rem;
+  align-items: end;
+}
 
 .comment-modal {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  justify-content: center;
+  background: rgba(122, 56, 178, 0.5);
+  border-radius: 5px;
   align-items: center;
+  height: 80vh;
+  color: white;
+  overflow: scroll;
+}
+
+.comment-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.comments-h1 {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+
+  color: #ffffff;
+}
+
+.form-wrapper {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: 2fr 1fr;
+
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid #7a38b2;
+  border-radius: 5px;
+}
+
+.form-wrapper * {
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.4);
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+
+  color: #000000;
+
+  /* opacity: 0.5; */
+  padding: 10px;
+}
+
+.form-wrapper button {
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
 }
 
 .modal-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  display: grid;
+  grid-template-rows: 0.1fr 0.5fr 6fr;
   padding: 20px;
   border-radius: 5px;
-  width: 800px;
-  height: 500px;
 }
 
+/* .comments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: auto;
+} */
+
 .close-icon {
-  position: absolute;
-  color: white;
-  top: 4rem;
-  right: 20rem;
+  margin-left: auto;
   cursor: pointer;
+}
+
+.comment-box * {
+  margin: 0;
+  padding: 0;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
+
+.comment-name {
+  display: flex;
+  gap: 10px;
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+
+  color: #ffffff;
+}
+
+.comment-photo {
+  width: 26px;
+  height: 26px;
+}
+
+.comment-message {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+
+  color: #000000;
+
+  /* opacity: 0.5; */
+  padding: 5px 10px;
 }
 
 h2 {
@@ -191,12 +292,16 @@ h2 {
   margin-right: 20px;
 }
 
-.comment-box {
-  width: 100%;
-  padding: 20px;
-}
-
 @media screen and (max-width: 768px) {
+  .launch-main {
+    grid-template-columns: 1fr;
+  }
+
+  .launch-cards-container {
+    padding: 0;
+    margin: -1rem;
+  }
+
   .launch-card {
     flex-direction: column;
     min-height: 400px;
@@ -204,6 +309,8 @@ h2 {
   .launch-card-info .likeBox {
     display: flex;
     flex-direction: row;
+    gap: 0;
+    align-items: end;
   }
   .detailStyle {
     flex-direction: column;
@@ -226,7 +333,6 @@ h2 {
     font-size: 10px;
   }
   .modal-content {
-    flex-direction: column;
     width: 90%;
     height: 90%;
   }
@@ -238,9 +344,32 @@ h2 {
   .comment-box {
     margin-top: 20px;
   }
+
   .close-icon {
+    position: absolute;
+    cursor: pointer;
     top: 20px;
     right: 10px;
+    color: #7a38b2;
+  }
+
+  .comment-modal {
+    display: flex;
+    position: fixed;
+    background-color: white;
+    z-index: 9999;
+    margin: -5%;
+    width: 90vw;
+  }
+
+  .comment-message {
+    background: rgba(122, 56, 178, 0.5);
+  }
+  .comment-name,
+  .comments-h1 {
     color: black;
+  }
+  .form-wrapper button {
+    background-color: rgba(122, 56, 178, 0.5);
   }
 }
