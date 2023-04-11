@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Poppins:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Poppins:wght@300&display=swap");
 
 .signup-container {
   position: relative;
@@ -14,15 +14,13 @@
   transform: translate(-50%, -50%);
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
   z-index: -1;
 }
 
-.signup-form-error{
-    color: white;
-    font-size: 0.7rem;
-    text-align: left;
+.signup-form-error {
+  color: white;
+  font-size: 0.7rem;
+  text-align: left;
 }
 
 .signup-form-container {
@@ -35,8 +33,7 @@
   padding: 30px;
   border-radius: 5px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
-
+  font-family: "Poppins", sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -47,11 +44,11 @@
 }
 
 .signup-form-container h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-align: left;
-    font-family: 'Fira Code', monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+  font-family: "Fira Code", monospace;
 }
 
 .signup-form-container p {
@@ -59,7 +56,7 @@
   font-weight: bold;
   text-align: left;
   color: white;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
 }
 
 .signup-form-container input {
@@ -70,56 +67,50 @@
   border: none;
   border-radius: 5px;
   font-size: 1rem;
-  background-color: rgba(121, 56, 178, 0.42); 
+  background-color: rgba(121, 56, 178, 0.42);
   color: white;
-  font-family: 'Poppins', monospace;
+  font-family: "Poppins", monospace;
 }
 
 .signup-form-container button {
-display: block;
-margin: 1.875rem 0;
-width: 100%;
-max-width: 400px;
-padding: 10px;
-border: none;
-border-radius: 5px;
-background-color: rgba(121, 56, 178, 0.42);
-color: white;
-font-size: 1.2rem;
-cursor: pointer;
-font-family: 'Fira Code', monospace;
+  display: block;
+  margin: 1.875rem 0;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(121, 56, 178, 0.42);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: "Fira Code", monospace;
 }
-
-
-
 
 @media (max-width: 768px) {
-.signup-form-container {
-width: 80%;
-}
+  .signup-form-container {
+    width: 80%;
+  }
 }
 
 @media (max-width: 576px) {
-.signup-form-container {
-padding: 20px;
+  .signup-form-container {
+    padding: 20px;
+  }
+
+  .signup-form-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .signup-form-container input {
+    font-size: 1rem;
+  }
+
+  .signup-form-container button {
+    font-size: 1rem;
+  }
+
+  .signup-form-container p {
+    font-size: 1rem;
+  }
 }
-
-.signup-form-container h1 {
-font-size: 1.5rem;
-}
-
-.signup-form-container input {
-font-size: 1rem;
-}
-
-.signup-form-container button {
-font-size: 1rem;
-}
-
-.signup-form-container p {
-font-size: 1rem;
-}
-}
-
-
-

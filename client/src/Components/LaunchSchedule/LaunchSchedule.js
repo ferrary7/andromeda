@@ -66,6 +66,7 @@ function LaunchSchedule() {
           body: JSON.stringify({ launchId, userId }),
         }
       );
+      // console.log(response);
 
       const likedLaunches =
         JSON.parse(localStorage.getItem("likedLaunches")) || [];
@@ -74,6 +75,7 @@ function LaunchSchedule() {
         JSON.stringify([...likedLaunches, launchId])
       );
       const updatedLaunch = await response.json();
+      console.log(updatedLaunch);
       setLaunchSchedule((prevLaunches) =>
         prevLaunches.map((launch) =>
           launch._id === updatedLaunch._id ? updatedLaunch : launch
@@ -219,8 +221,10 @@ function LaunchSchedule() {
                       >
                         {localStorage.getItem("token") ? (
                           <>
-                            {launch.likes.includes(
-                              jwtDecode(localStorage.getItem("token"))._id
+                            {launch.likes.find(
+                              (elt) =>
+                                elt._id ===
+                                jwtDecode(localStorage.getItem("token"))._id
                             ) ? (
                               <FavoriteIcon />
                             ) : (

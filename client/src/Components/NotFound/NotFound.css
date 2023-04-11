@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Lacquer&family=Nunito+Sans&display=swap");
+
+.NotFound {
+  height: 90vh;
+  position: relative;
+}
+
+.NotFound-video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+
+.NotFound-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10rem 5rem;
+  width: 50%;
+}
+
+.NotFound-text {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-size: 4rem;
+  text-align: left;
+  font-family: "Fira Code", monospace;
+}
+
+.NotFound-header {
+  font-size: 3rem;
+  font-family: poppins;
+}
+
+.extra-text {
+  font-weight: 700;
+  width: 80%;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: "Fira Code", monospace;
+}
+
+.NotFound-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.NotFound-button-container {
+  margin-right: 0;
+  margin-bottom: 2rem;
+}
+
+.NotFound-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+}
+
+.NotFound-powered-by {
+  padding-top: 2rem;
+  color: #fff;
+}
+
+.NotFound-powered-by img {
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .over-container {
+    flex-direction: column;
+  }
+  .NotFound-container {
+    top: 10%;
+    width: 80%;
+    padding: 1rem;
+  }
+  .NotFound-text {
+    font-size: 4rem;
+  }
+  .NotFound-header {
+    font-size: 2rem;
+  }
+  .extra-text {
+    font-size: 0.8rem;
+  }
+  .NotFound-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  .NotFound-powered-by {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .NotFound-container {
+    top: 20%;
+    width: 90%;
+  }
+  .NotFound-text {
+    padding-top: 2rem;
+    font-size: 3rem;
+  }
+  .NotFound-header {
+    font-size: 2rem;
+  }
+  .extra-text {
+    font-size: 0.8rem;
+  }
+  .NotFound-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  .NotFound-powered-by {
+    font-size: 0.7rem;
+  }
+}

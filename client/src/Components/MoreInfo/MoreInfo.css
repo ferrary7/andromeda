@@ -1,13 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Poppins:wght@300&display=swap");
 
+.MoreInfo {
+  height: 130vh;
+  position: relative;
+}
 .background-video {
-  position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  z-index: -1;
+  position: absolute;
 }
 .details-container {
   display: flex;
@@ -82,4 +85,31 @@
   max-height: 50px;
   height: auto\9;
   width: auto; /* ie8 */
+}
+
+@media (max-width: 768px) {
+  .more-info {
+    padding: 2rem;
+  }
+  .more-info h1 {
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+  }
+  .agency-logo {
+    display: none;
+  }
+  .details-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .details {
+    padding: 1rem;
+    width: 100%;
+    overflow-y: scroll;
+  }
+  .more-info-image {
+    height: 200px;
+  }
 }
