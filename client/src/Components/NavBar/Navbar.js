@@ -40,7 +40,7 @@ const Navbar = () => {
         <Logo href="/">ANDROMEDA</Logo>
         <Menu onClick={() => setIsOpen(!isOpen)} />
         <Tabs isOpen={isOpen}>
-          <Tab href="/">About this page</Tab>
+          <Tab href="/about">About</Tab>
           <Tab href="/upcomingLaunches">Launch schedule</Tab>
           {userName ? (
             <TabButton

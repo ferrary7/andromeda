@@ -32,7 +32,7 @@ const MoreInfo = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="MoreInfo">
         <video
           className="background-video"
           autoPlay
