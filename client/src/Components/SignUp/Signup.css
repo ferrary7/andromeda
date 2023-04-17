@@ -36,6 +36,25 @@
   font-family: "Poppins", sans-serif;
 }
 
+.Toastify__toast-container {
+  z-index: 9999;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.Toastify__toast {
+  margin-bottom: 1rem;
+}
+
+.Toastify__toast--success {
+  background-color: #1abc9c;
+}
+
+.Toastify__toast--error {
+  background-color: #e74c3c;
+}
+
 @media (max-width: 768px) {
   .signup-form-container {
     left: 50%;

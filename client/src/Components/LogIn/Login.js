@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import background from "../../Assets/bg.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../NavBar/Navbar";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -20,6 +22,11 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const notify = () => {
+    toast("Logged in Successfully 🚀", {
+      autoClose: 3000,
+    });
+  };
 
   const handleLogin = async (
     values,
@@ -43,7 +50,9 @@ const Login = () => {
         localStorage.setItem("userName", data.name);
         console.log("User authenticated");
         localStorage.setItem("token", data.token);
-        navigate(`/`);
+        setTimeout(() => {
+          navigate(`/`);
+        }, 2000);
       } else {
         console.log(data.error);
         setErrors({ password: data.error });
@@ -67,6 +76,7 @@ const Login = () => {
           muted
           src={background}
         />
+        <ToastContainer />
         <div className="login-form-container">
           <Formik
             initialValues={initialValues}
@@ -104,6 +114,7 @@ const Login = () => {
                   className="login-form-button"
                   type="submit"
                   disabled={!formik.isValid}
+                  onClick={notify}
                 >
                   Log In
                 </button>
