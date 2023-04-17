@@ -4,15 +4,18 @@ const launchSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    index: true,
   },
   net: {
     type: Date,
     required: true,
+    index: true,
   },
   pad: {
     name: {
       type: String,
       required: true,
+      index: true,
     },
     latitude: {
       type: String,
@@ -26,6 +29,7 @@ const launchSchema = new mongoose.Schema({
       name: {
         type: String,
         required: true,
+        index: true,
       },
       country_code: {
         type: String,
@@ -46,6 +50,7 @@ const launchSchema = new mongoose.Schema({
       name: {
         type: String,
         required: false,
+        index: true,
       },
     },
   },
@@ -53,6 +58,7 @@ const launchSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
+      index: true,
     },
     type: {
       type: String,
@@ -63,6 +69,7 @@ const launchSchema = new mongoose.Schema({
     name: {
       type: String,
       required: false,
+      index: true,
     },
     type: {
       type: String,
@@ -76,6 +83,7 @@ const launchSchema = new mongoose.Schema({
       name: {
         type: String,
         required: false,
+        index: true,
       },
       abbrev: {
         type: String,
@@ -86,15 +94,18 @@ const launchSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
+    index: true,
   },
   webcast_live: {
     type: String,
     required: true,
+    index: true,
   },
   status: {
     name: {
       type: String,
       required: false,
+      index: true,
     },
     description: {
       type: String,
@@ -105,6 +116,7 @@ const launchSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      index: true,
     },
   ],
   comments: {
@@ -112,6 +124,7 @@ const launchSchema = new mongoose.Schema({
     required: false,
   },
 });
+
 const Launch = mongoose.model("Launch", launchSchema);
 
 module.exports = Launch;
