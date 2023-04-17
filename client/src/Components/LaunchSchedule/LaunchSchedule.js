@@ -5,7 +5,6 @@ import "./LaunchSchedule.css";
 import background from "../../Assets/bg.mp4";
 import Navbar from "../NavBar/Navbar";
 import button from "../../Assets/Button.svg";
-// import profile from "../../Assets/profile.png";
 import Loader from "../Loader/Loader";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import DateRangeIcon from "@mui/icons-material/DateRange";
